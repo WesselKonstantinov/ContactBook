@@ -100,10 +100,25 @@ def delete(id):
         click.echo('Contact not found.')
 
 
+@click.command()
+@click.argument('name')
+def search(name):
+    """Search contacts by name."""
+    cursor.execute(
+        'SELECT * FROM contacts WHERE name LIKE ?',
+        (f'%{name}%',)
+    )
+    contacts_table = from_db_cursor(cursor)
+    click.echo(contacts_table)
+
+    connection.close()
+
+
 cli.add_command(add)
 cli.add_command(view)
 cli.add_command(edit)
 cli.add_command(delete)
+cli.add_command(search)
 
 if __name__ == '__main__':
     setup_contacts_table()
