@@ -110,13 +110,11 @@ def search(name):
     db.connection.close()
 
 
-cli.add_command(add)
-cli.add_command(view)
-cli.add_command(edit)
-cli.add_command(delete)
-cli.add_command(search)
-
-
 def main():
+    """Starting point of the application."""
+    commands = [add, view, edit, delete, search]
+    for command in commands:
+        cli.add_command(command)
+
     db.setup_contacts_table()
     cli()
