@@ -11,18 +11,27 @@ def cli():
 
 @click.command()
 @click.argument('name')
-@click.argument('phone_number')
-@click.argument('email_address')
+@click.option('-pn', '--phone-number', help='Phone number of a given person')
+@click.option('-ea', '--email-address', help='Email address of a given person')
 def add(name, phone_number, email_address):
     """Create and store new contact details in database."""
+    contact = {
+        'name': name,
+        'phone_number': phone_number,
+        'email_address': email_address,
+    }
     db.cursor.execute("""INSERT INTO contacts (
             name,
             phone_number,
             email_address
-        ) VALUES (?, ?, ?)""", (name, phone_number, email_address))
+        ) VALUES (?, ?, ?)""", (
+        contact['name'],
+        contact['phone_number'],
+        contact['email_address']
+    ))
     db.connection.commit()
     db.connection.close()
-    click.echo(f'Saved contact details of {name}.')
+    click.echo(f'Added {name} to contact book.')
 
 
 @click.command()
