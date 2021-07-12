@@ -73,7 +73,7 @@ Running `python3 contacts.py view` will display an overview of all stored contac
 |     2      |    Hector Kamps    |     None     | h.kamps@gmail.com |
 +------------+--------------------+--------------+-------------------+
 ```
-It is also possible to display the contact details of one person by suppyling an id:
+It is also possible to display the contact details of one person by supplying an id:
 ```
 $ python3 contacts.py view --id 2
 +------------+--------------+--------------+-------------------+
